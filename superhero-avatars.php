@@ -35,8 +35,12 @@ class Superhero_Avatars {
 		add_action( 'admin_init', array( $this, 'save' ) );
 		add_filter( 'get_avatar', array( $this, 'get_avatar' ), 10, 5 );
 		add_action( 'init', array( $this, 'i18n' ) );
+		add_action( 'wp_footer', array( $this, 'marvel_attribution' ) );
 	}
 
+	/**
+	 *
+	 */
 	public function i18n() {
 		load_plugin_textdomain( 'superhero-avatars', false, dirname( plugin_basename( __FILE__) ) . '/languages/' );
 	}
@@ -163,6 +167,10 @@ class Superhero_Avatars {
 			wp_cache_set( 'superheroes', $return, 'superheroes', 86400 );
 		}
 		return $return;
+	}
+
+	public function marvel_attribution() {
+		echo '<p class="marvel-attribution"><a href="http://marvel.com" rel="nofollow">Data provided by Marvel. © 2015 MARVEL</a></p>';
 	}
 }
 
