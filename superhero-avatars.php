@@ -7,6 +7,7 @@
  * Description: Uses the <a href="">Marvel&trade; API</a> to change avatars into Superhero icons
  * License: MIT
  * Text Domain: superhero-avatars
+ * Version: 1.0-RC1
  */
 
 class Superhero_Avatars {
