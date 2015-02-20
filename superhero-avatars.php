@@ -25,7 +25,6 @@ class Superhero_Avatars {
 
 		$this->pubkey = ( array_key_exists( 'pubkey', $superhero_opts ) ) ? (string) $superhero_opts['pubkey'] : false;
 		$this->prikey = ( array_key_exists( 'prikey', $superhero_opts ) ) ? (string) $superhero_opts['prikey'] : false;
-		$this->hooks();
 	}
 
 	/**
@@ -50,7 +49,7 @@ class Superhero_Avatars {
 	 *
 	 */
 	public function admin_menu() {
-		add_options_page( __( 'Superhero Avatars', 'superhero-avatars' ), __( 'Superhero Avatars', 'superhero-avatars' ), 'manage_options', 'superhero-options', array( $this, 'admin' ) );
+		return add_options_page( __( 'Superhero Avatars', 'superhero-avatars' ), __( 'Superhero Avatars', 'superhero-avatars' ), 'manage_options', 'superhero-options', array( $this, 'admin' ) );
 	}
 
 	/**
@@ -98,7 +97,7 @@ class Superhero_Avatars {
 		if( array_key_exists( 'superhero-prikey', $_POST ) )
 			$settings['prikey'] = $_POST['superhero-prikey'];
 
-		update_option( 'superhero_opts', $settings );
+		return update_option( 'superhero_opts', $settings );
 	}
 
 	/**
@@ -138,7 +137,7 @@ class Superhero_Avatars {
 	 * @return string
 	 */
 	public function create_avatar_html( $url, $size, $alt ) {
-		return sprintf( '<img src="%1$s" height="%2$s" width="%2$s" class="avatar avatar-%2$s" style="height:%2$s; width: %2$s" alt="%3$s" title="%3$s" />',
+		return sprintf( '<img src="%1$s" height="%2$s" width="%2$s" class="avatar avatar-%2$s" style="height:%2$spx; width: %2$spx" alt="%3$s" title="%3$s" />',
 			esc_url( $url ),
 			esc_attr( $size ),
 			esc_attr( $alt ) );
@@ -175,4 +174,5 @@ class Superhero_Avatars {
 	}
 }
 
-new Superhero_Avatars;
+$superheroes = new Superhero_Avatars;
+$superheroes->hooks();
