@@ -1,0 +1,6 @@
+.svn
+.idea
+bin
+.travis.yml
+phpunit.xml
+tests
