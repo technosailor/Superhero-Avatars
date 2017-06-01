@@ -95,6 +95,10 @@ class Options {
 	 * @return bool
 	 */
 	public function save() {
+		if( empty( $_POST['superhero-nonce'] ) ) {
+			return false;
+		}
+
 		if( ! wp_verify_nonce( $_POST['superhero-nonce'], self::OPTION ) ) {
 			return false;
 		}

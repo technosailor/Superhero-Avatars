@@ -4,6 +4,8 @@ namespace Technosailor\Superheros\Theme;
 use Technosailor\Superheros\Api\Api;
 
 class Avatar {
+	const NAME = 'avatar';
+
 	public function init() {
 		add_filter( 'get_avatar', [ $this, 'get_avatar' ], 10, 5 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
@@ -11,8 +13,12 @@ class Avatar {
 
 	public function enqueue() {
 		$superherojs_url = ( defined( 'SCRIPT_DEBUG' ) && false !== SCRIPT_DEBUG ) ? MSH_URL . 'assets/js/superhero-avatars.js' : MSH_URL . 'assets/js/superhero-avatars.min.js';
-		wp_register_script( 'superheros', $superherojs_url, [ 'js-cookie' ], filemtime( __FILE__ ) );
-		wp_localize_script( 'superheros', 'marvel', [] );
+		wp_register_script( 'superheros', $superherojs_url, [ 'js-cookie', 'jquery' ], filemtime( __FILE__ ) );
+		wp_localize_script( 'superheros', 'marvel', [
+			'cookieName'    => 'superhero',
+			'ajaxUrl'       => '/wp-admin/admin-ajax.php',
+			'nonce'         => wp_create_nonce( self::NAME )
+		] );
 		wp_enqueue_script( 'superheros' );
 
 		wp_enqueue_script( 'js-cookie', MSH_URL . 'assets/js/vendor/js-cookie.js', [], filemtime( __FILE__ ) );
@@ -74,9 +80,16 @@ class Avatar {
 		$ext = $random['thumbnail']['extension'];
 		$path = $random['thumbnail']['path'];
 		$image_url = $path . '.' . $ext;
-		$hero['image_url']  = $image_url;
-		$hero['name']       = $random['name'];
+		$hero['image_url']  = trim( $image_url );
+		$hero['name']       = trim( $random['name'] );
 
 		return $hero;
+	}
+
+	/**
+	 * @return General
+	 */
+	public static function instance() {
+		return superheros()->container()['theme.avatar'];
 	}
 }

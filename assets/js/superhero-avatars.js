@@ -1,9 +1,20 @@
-/**
- * @module
- * @description JavaScript specific to setting cookies for superhero avatar
- */
+jQuery(document).ready(function($) {
 
-console.debug('foo');
-console.debug(
-    'bar'
-);
+    console.debug( Cookies.get( marvel.cookieName ) );
+    //if ( 'undefined' === Cookies.get( marvel.cookieName ) ) {
+        var postData = {
+            "action": "get_a_hero",
+            "nonce": marvel.nonce
+        };
+
+        $.post(
+            marvel.ajaxUrl,
+            postData,
+            function( response ) {
+                var data = JSON.parse( response );
+                console.debug( data );
+                Cookies.set( marvel.cookieName, data.data.image_url, { expires: 87600 } );
+            }
+        );
+   // }
+});
