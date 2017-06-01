@@ -8,7 +8,7 @@ use Technosailor\Superheros\Admin\Options;
 class Admin_Service_Provider implements ServiceProviderInterface {
 
 	public function register( Container $container ) {
-		$container['admin.options'] = function( $container ) {
+		$container['admin.options'] = function( Container $container ) {
 			return new Options();
 		};
 

@@ -3,6 +3,7 @@ namespace Technosailor\Superheros;
 
 use Technosailor\Superheros\Service_Providers\Admin_Service_Provider;
 use Technosailor\Superheros\Service_Providers\Api_Service_Provider;
+use Technosailor\Superheros\Service_Providers\Theme_Service_Provider;
 
 class Core {
 
@@ -26,6 +27,7 @@ class Core {
 	public function load_service_providers() {
 		$this->container->register( new Api_Service_Provider() );
 		$this->container->register( new Admin_Service_Provider() );
+		$this->container->register( new Theme_Service_Provider() );
 	}
 
 	/**

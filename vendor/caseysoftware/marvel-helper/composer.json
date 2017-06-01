@@ -1,0 +1,22 @@
+{
+    "name": "caseysoftware/marvel-helper",
+    "version": "2.0.0",
+    "type": "library",
+    "description": "A PHP wrapper for the Marvel Comics API",
+    "keywords": ["marvel", "comic", "api", "marvel comics", "avengers", "x-men"],
+    "homepage": "https://github.com/caseysoftware/marvel-php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Keith Casey",
+            "email": "contrib@caseysoftware.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "autoload": {
+        "psr-4": { "Marvel\\": "src/Marvel/"}
+    }
+}
