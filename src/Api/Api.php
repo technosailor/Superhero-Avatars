@@ -72,6 +72,7 @@ class Api {
 		$superheroes = wp_cache_get( self::CACHE_KEY, self::CACHE_GROUP );
 		if( empty( $superheroes ) || false !== $force_cache ) {
 			$superheroes = $this->client->characters->index( 1, 100 )->data;
+			$superheroes = $this->remove_pictureless_heros( $superheroes );
 
 			if( ! empty( $superheroes ) ) {
 				wp_cache_set( self::CACHE_KEY, $superheroes, self::CACHE_GROUP, DAY_IN_SECONDS );
@@ -79,6 +80,24 @@ class Api {
 		}
 
 		return $superheroes;
+	}
+
+	/**
+	 * Unset heroes that have no pictures
+	 *
+	 * @param array $heroes
+	 *
+	 * @return array
+	 */
+	public function remove_pictureless_heros( array $heroes ) {
+		foreach( $heroes as $key => $hero ) {
+			$thumbnail_path = $hero['thumbnail']['path'];
+			if( false !== strpos( $thumbnail_path, 'image_not_available' ) ) {
+				unset( $heroes[ $key ] );
+			}
+		}
+
+		return $heroes;
 	}
 
 	/**

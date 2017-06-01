@@ -10,6 +10,12 @@
  * Version: 2.0
  */
 
+// Useful global constants
+define( 'MSH_VERSION', '0.2.0' );
+define( 'MSH_URL',     plugin_dir_url( __FILE__ ) );
+define( 'MSH_PATH',    dirname( __FILE__ ) . '/' );
+define( 'MSH_INC',     MSH_PATH . 'includes/' );
+
 require_once trailingslashit( __DIR__ ) . 'vendor/autoload.php';
 
 add_action( 'plugins_loaded', function () {

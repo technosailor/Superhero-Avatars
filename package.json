@@ -1,0 +1,32 @@
+{
+  "name": "superhero-avatars",
+  "version": "2.0.0",
+  "description": "Uses the Marvel&trade; API to change avatars into Superhero icons",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/technosailor/Superhero-Avatars.git"
+  },
+  "keywords": [
+    "marvel"
+  ],
+  "author": "Aaron Brazell <aaron@technosailor.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/technosailor/Superhero-Avatars/issues"
+  },
+  "homepage": "https://github.com/technosailor/Superhero-Avatars#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-uglify": "^3.0.1",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}

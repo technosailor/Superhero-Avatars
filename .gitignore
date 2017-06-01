@@ -4,3 +4,4 @@ bin
 .travis.yml
 phpunit.xml
 tests
+node_modules
