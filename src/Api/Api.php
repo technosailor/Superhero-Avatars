@@ -33,9 +33,8 @@ class Api {
 		if( defined( 'MARVEL_PUB_KEY' ) && ! empty( MARVEL_PUB_KEY ) ) {
 			return MARVEL_PUB_KEY;
 		} else {
-			$auth = get_option( Options::NAME );
-			if( ! empty( $auth['pubkey'] ) ) {
-				return $auth['pubkey'];
+			if( ! empty( $this->pubkey ) ) {
+				return $this->pubkey;
 			}
 		}
 
@@ -52,8 +51,8 @@ class Api {
 			return MARVEL_PRI_KEY;
 		} else {
 			$auth = get_option( Options::NAME );
-			if( ! empty( $auth['prikey'] ) ) {
-				return $auth['prikey'];
+			if( ! empty( $this->prikey ) ) {
+				return $this->prikey;
 			}
 		}
 
@@ -101,7 +100,7 @@ class Api {
 	}
 
 	/**
-	 * @return General
+	 * @return \Pimple\Container
 	 */
 	public static function instance() {
 		return superheros()->container()['api'];
