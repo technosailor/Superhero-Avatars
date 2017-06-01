@@ -30,24 +30,19 @@ class Avatar {
 	 * @return string
 	 */
 	public function get_avatar( $avatar, $id_or_email, $size, $default, $alt ) {
-		$current_user = get_current_user();
+		$current_user = wp_get_current_user();
 
-		if( $url = get_user_meta( $current_user->ID, 'superhero_avatar_url', true ) ) {
+		$url = get_user_meta( $current_user->ID, 'superhero_avatar_url', true );
+		if( ! empty( $url ) ) {
 			return $this->create_avatar_html( $url, $size, $current_user->display_name );
 		}
 
-		$api = Api::instance();
-		$superheros = $api->superheroes;
-
-		$random = $superheros[array_rand( $superheros, 1 )];
-		$ext = $random['thumbnail']['extension'];
-		$path = $random['thumbnail']['path'];
-		$image_url = $path . '.' . $ext;
+		$hero = $this->get_a_hero_image( Api::instance()->superheroes );
 
 		if( is_user_logged_in() ) {
-			update_user_meta( $current_user, 'superhero_avatar_url', true );
+			update_user_meta( $current_user->ID, 'superhero_avatar_url', $hero['image_url'] );
 		}
-		return $this->create_avatar_html( $image_url, $size, $random->name );
+		return $this->create_avatar_html( $hero['image_url'], $size, $hero['name'] );
 	}
 
 	/**
@@ -62,5 +57,26 @@ class Avatar {
 			esc_url( $url ),
 			esc_attr( $size ),
 			esc_attr( $alt ) );
+	}
+
+	/**
+	 * Return a random Superhero Image URL
+	 *
+	 * @param array $heroes
+	 *
+	 * @return string
+	 */
+	public function get_a_hero_image( array $heroes ) {
+
+		$hero = [];
+
+		$random = $heroes[array_rand( $heroes, 1 )];
+		$ext = $random['thumbnail']['extension'];
+		$path = $random['thumbnail']['path'];
+		$image_url = $path . '.' . $ext;
+		$hero['image_url']  = $image_url;
+		$hero['name']       = $random['name'];
+
+		return $hero;
 	}
 }
