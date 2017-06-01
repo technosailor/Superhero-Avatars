@@ -1,0 +1,32 @@
+{
+  "name": "technosailor/superhero-avatars",
+  "description": "Uses the  Marvel&trade; API to change avatars into Superhero icons",
+  "type": "wordpress-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Aaron Brazell",
+      "email": "aaron@technosailor.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Technosailor\\Superheros\\": "src/"
+    }
+  },
+  "require-dev": {
+    "caseysoftware/marvel-helper": "dev-master",
+    "pimple/pimple": "^3.0@dev"
+  },
+  "config": {
+    "vendor-dir": "vendor",
+    "preferred-install": "dist"
+  }
+}
